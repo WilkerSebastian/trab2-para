@@ -2,8 +2,6 @@
 
 local CXX = os.getenv("CXX") and os.getenv("CXX") or "gcc"
 
-math.randomseed(os.time())
-
 function ExecuteTest(target, size, core)
 
 	local handle = io.popen(
@@ -91,43 +89,7 @@ elseif arg[1] == "test" then
 	ExecuteTest(arg[2], "3584", arg[3])
 
 	ExecuteTest(arg[2], "4096", arg[3])
-
-elseif arg[1] == "random" then
-
-	local file = io.open(arg[3], "wb")
-
-	if file == nil then
-		print("arquivo escrito não pode ser criado no caminho " .. arg[3])
-		os.exit(1)
-	end
-
-	local row = tonumber(arg[2])
-	local column = tonumber(arg[2])
-
-	local matrix = {}
-
-	for i = 1, row * row do
-
-		matrix[i] = {}
-
-		for j = 1, column do
-			matrix[i][j] = math.random(0, 100)
-		end
-
-	end
-
-	file:write(row)
-
-	for i = 1, row * row do
-
-		for j = 1, column do
-			file:write(matrix[i][j])
-		end
-
-	end
-
-	file:close()
-
+	
 else
 	print([[
 Uso:
@@ -166,9 +128,6 @@ Comandos disponíveis:
       Executa uma bateria de testes para a versão par com T threads.
   test par2d <T>
       Executa uma bateria de testes para a versão par2d com T threads.
-
-  random <M> <arquivo_saida>
-      Gera uma matriz MxM com valores aleatórios de 0 a 100 e salva em arquivo_saida (modo binário).
 
 Descrição:
   Este CLI em Lua automatiza o processo de compilação, execução e teste
