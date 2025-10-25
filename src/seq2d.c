@@ -21,7 +21,7 @@ void matrixMultiplication(int** A, int** B, int** C, int n) {
 
             for (int k_block = 0; k_block < n; k_block += blockSize) {
 
-                int i_end = i_block + blockSize < n ? j_block + blockSize : n;
+                int i_end = i_block + blockSize < n ? i_block + blockSize : n;
                 int j_end = j_block + blockSize < n ? j_block + blockSize : n;
                 int k_end = k_block + blockSize < n ? k_block + blockSize : n;
 
